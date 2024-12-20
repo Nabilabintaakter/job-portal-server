@@ -50,7 +50,7 @@ async function run() {
         const result = await jobsCollection.findOne(query);
         res.send(result);
     })
-
+    
 
 // jobs application related apis
     // post all data
@@ -59,7 +59,13 @@ async function run() {
         const result = await jobApplicationCollection.insertOne(application);
         res.send(result);
     })
-
+    // get specific user's data
+    app.get('/job-applications', async(req,res)=>{
+        const email = req.query.email;
+        const query = {applicant_email: email}
+        const result = await jobApplicationCollection.find(query).toArray();
+        res.send(result);
+    })
 
 
 
